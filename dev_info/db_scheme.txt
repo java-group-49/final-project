@@ -1,0 +1,30 @@
+author:
+    id;
+    name;
+    last_name;
+    rate (higher than 0 and lower than 11 default 1);
+    nickname (unique);
+
+subscriber:
+    id;
+    username (unique);
+    email (unique);
+
+tag:
+    id;
+    name (unique);
+
+author_subscriber
+    author_id;
+    subscriber_id;
+    (unique combination of author and subscriber)
+
+post:
+    id;
+    title;
+    body;
+    author_id;
+    publication_date;
+    tag_id;
+
+
