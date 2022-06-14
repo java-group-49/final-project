@@ -17,7 +17,7 @@ tag:
 author_subscriber
     author_id;
     subscriber_id;
-    (unique combination of author and subscriber)
+    (primary key on both fields)
 
 post:
     id;
