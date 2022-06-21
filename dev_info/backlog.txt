@@ -10,3 +10,4 @@
 10*. Create functionality of sending messages to subscribers by email. This functionality should be
 scheduled once a day. We get all the subscribers from db, iterate over this list, check whether new
 of authors exist and if yes then send email to this user.(+-)
+11. Cover Services with unit test (if it makes sense)
