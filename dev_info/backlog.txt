@@ -1,5 +1,5 @@
-1. Create tables following db_scheme.txt file.
-2. Create and save new author. (endpoint: POST /author).
+1. Create tables following db_scheme.txt file.(+)
+2. Create and save new author. (endpoint: POST /author).(+)
 3. Create and save new subscriber (POST /subscriber).
 4. Create and save new tag(POST /tag).
 5. Attach subscriber to author(POST /subscribe).
@@ -9,4 +9,4 @@
 9. Get subscribers by author(GET /subscriber?author=).
 10*. Create functionality of sending messages to subscribers by email. This functionality should be
 scheduled once a day. We get all the subscribers from db, iterate over this list, check whether new
-of authors exist and if yes then send email to this user.
+of authors exist and if yes then send email to this user.(+-)
