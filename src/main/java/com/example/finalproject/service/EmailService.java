@@ -17,13 +17,13 @@ public class EmailService {
         this.emailSender = emailSender;
     }
 
-    @Scheduled(cron = "0 0 12 * * *")
-    public void sendSimpleMessage() {
+
+    public void sendSimpleMessage(String to, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("accforgit49@gmail.com");
-        message.setTo("dzinoveev@gmail.com");
-        message.setSubject("Сообщение ждя футуре прогера");
-        message.setText("Поздравляю, ты таки идийот, но не полный");
+        message.setTo(to);
+        message.setSubject("New posts in the last day");
+        message.setText(text);
         emailSender.send(message);
     }
 }
