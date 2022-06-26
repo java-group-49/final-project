@@ -33,18 +33,18 @@ public class SubscriberService {
         return new ArrayList<>();
     }
 
-    public Subscriber getSubscriber(String name) {
-        return sub.getSubscriberByName(name);
+    public Subscriber getSubscriber(String username) {
+        return sub.getSubscriber(username);
     }
     public void addSubscriber(Subscriber s) {
         sub.save(s);
     }
 
-//    public void update (subscriber s, String name) {
-//        subscriberRepository.updateSubscriber(s.getUserName(), s.getEmail(), name);
-//    }
+    public void update (Subscriber s, String username) {
+        SubscriberRepository.updateSubscriber(s.getUsername(), s.getEmail(), username);
+    }
 
-    public  void deleteSubscriber(String name) {
-        sub.deleteSubscriberByName(name);
+    public  void deleteSubscriber(String username) {
+        sub.deleteSubscriber(username);
     }
 }

@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
-    protected String name;
+    private Long id;
+    private String name;
 
     public Long getId() {
         return id;

@@ -10,9 +10,9 @@ public class Subscriber {
     @Column
     protected Long id;
     @Column(name = "username")
-    protected String userName;
+    private String username;
     @Column(name = "email")
-    protected String email;
+    private String email;
 
     public long getId() {
         return id;
@@ -22,12 +22,12 @@ public class Subscriber {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String username) {
-        this.userName = username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -36,14 +36,5 @@ public class Subscriber {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "subscriber{" +
-                "id=" + id +
-                ", username='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

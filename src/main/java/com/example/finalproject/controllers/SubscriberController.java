@@ -30,32 +30,30 @@ public class SubscriberController {
         return ResponseEntity.ok(subscribers);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/subscriber")
     public ResponseEntity<Void> addSubscriber(@RequestBody Subscriber s) {
         service.addSubscriber(s);
         return ResponseEntity.status(201).build();
     }
 
- //   @PutMapping("/update/{name}")
-//    public ResponseEntity<Void> updateSubscriber(@PathVariable String userName, @RequestBody subscriber s) {
-//        service.update(s, userName);
-//        return ResponseEntity.ok().build();
-//    }
+    @PutMapping("/update/{username}")
+    public ResponseEntity<Void> updateSubscriber(@PathVariable String username, @RequestBody Subscriber s) {
+        service.update(s, username);
+        return ResponseEntity.ok().build();
+    }
 
-    @DeleteMapping("/delete/{name}")
-    public ResponseEntity<Void> deleteSubscriber(@PathVariable String userName) {
-        service.deleteSubscriber(userName);
+    @DeleteMapping("/subscriber/{username}")
+    public ResponseEntity<Void> deleteSubscriber(@PathVariable String username) {
+        service.deleteSubscriber(username);
         return ResponseEntity.status(202).build();
     }
 
-    @GetMapping("/student/{name}")
-    public ResponseEntity<Subscriber> getSubscribers(@PathVariable String name) {
-        Subscriber s = service.getSubscriber(name);
-
+    @GetMapping("/subscriber/{username}")
+    public ResponseEntity<Subscriber> getSubscribers(@PathVariable String username) {
+        Subscriber s = service.getSubscriber(username);
         if (s == null) {
             return ResponseEntity.status(404).build();
         }
-
         return ResponseEntity.ok(s);
     }
 }
