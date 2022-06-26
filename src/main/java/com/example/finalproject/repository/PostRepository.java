@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
     @Query(value = "SELECT new com.example.finalproject.models.EmailMessageModel(sb.email, au.nickname, p.title, p.body) " +
-            "FROM Author au inner join AuthorSubscriber ausb on au.id = ausb.author_id " +
-            "INNER join Subscriber sb on sb.id = ausb.subscriber_id " +
-            "INNER join Post p on p.author_id = au.id " +
-            "where ?1 < p.publication_date AND p.publication_date < ?2 ")
-    public List<EmailMessageModel> getListOfDataForSending(Date from, Date to);
+            "FROM Author au inner join AuthorSubscriber ausb on au.id = ausb.authorId " +
+            "INNER join Subscriber sb on sb.id = ausb.subscriberId " +
+            "INNER join Post p on p.authorId = au.id " +
+            "where ?1 < p.publicationDate AND p.publicationDate < ?2 ")
+    List<EmailMessageModel> getListOfDataForSending(Date from, Date to);
 }

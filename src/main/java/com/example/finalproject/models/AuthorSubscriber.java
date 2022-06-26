@@ -10,10 +10,10 @@ import java.io.Serializable;
 @Table(name = "author_subscriber")
 public class AuthorSubscriber implements Serializable {
     @Id
-    @Column
-    private Long author_id;
+    @Column(name = "author_id")
+    private Long authorId;
 
     @Id
-    @Column
-    private Long subscriber_id;
+    @Column(name = "subscriber_id")
+    private Long subscriberId;
 }

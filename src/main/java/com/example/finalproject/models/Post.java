@@ -1,22 +1,23 @@
 package com.example.finalproject.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.xml.crypto.Data;
+import javax.persistence.*;
 import java.time.LocalDate;
 @Entity
 @Table(name = "post")
 public class Post {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column
     private String title;
+    @Column
     private String body;
-    private Long author_id;
-    private LocalDate publication_date;
-    private Long tag_id;
+    @Column(name = "author_id")
+    private Long authorId;
+    @Column(name = "publication_date")
+    private LocalDate publicationDate;
+    @Column(name = "tag_id")
+    private Long tagId;
 
     public Long getId() {
         return id;
@@ -42,27 +43,27 @@ public class Post {
         this.body = body;
     }
 
-    public Long getAuthor_id() {
-        return author_id;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor_id(Long author_id) {
-        this.author_id = author_id;
+    public void setAuthorId(Long author_id) {
+        this.authorId = author_id;
     }
 
-    public LocalDate getPublication_date() {
-        return publication_date;
+    public LocalDate getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setPublication_date(LocalDate publication_date) {
-        this.publication_date = publication_date;
+    public void setPublicationDate(LocalDate publication_date) {
+        this.publicationDate = publication_date;
     }
 
-    public Long getTag_id() {
-        return tag_id;
+    public Long getTagId() {
+        return tagId;
     }
 
-    public void setTag_id(Long tag_id) {
-        this.tag_id = tag_id;
+    public void setTagId(Long tag_id) {
+        this.tagId = tag_id;
     }
 }
