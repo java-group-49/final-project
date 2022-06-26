@@ -7,7 +7,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -20,18 +22,20 @@ public class SubscriberService {
     }
 
     public List<Subscriber> getAllSubscribers() {
-
-        return new ArrayList<>();
+        List<Subscriber> list = new ArrayList<>();
+        repository.findAll().forEach(list::add);
+        return list;
     }
 
     public Subscriber getSubscriber(String username) {
         return repository.getSubscriberByUsername(username);
     }
+
     public void addSubscriber(Subscriber s) {
         repository.save(s);
     }
 
-    public void update (Subscriber s, String username) {
+    public void update(Subscriber s, String username) {
         repository.updateSubscriber(s.getUsername(), s.getEmail(), username);
     }
 
