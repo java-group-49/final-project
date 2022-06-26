@@ -8,7 +8,7 @@ public class Subscriber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    protected Long id;
+    private Long id;
     @Column(name = "username")
     private String username;
     @Column(name = "email")
