@@ -30,7 +30,7 @@ public class SubscriberController {
         return ResponseEntity.ok(subscribers);
     }
 
-    @GetMapping("/subscriber/{username}")
+    @GetMapping("/subscriber")
     public ResponseEntity<Subscriber> getSubscribers(@PathVariable String username) {
         Subscriber s = service.getSubscriber(username);
         if (s == null) {

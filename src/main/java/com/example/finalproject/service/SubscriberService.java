@@ -44,7 +44,7 @@ public class SubscriberService {
         repository.updateSubscriber(s.getUsername(), s.getEmail(), username);
     }
 
-    public  void deleteSubscriber(String username) {
+    public void deleteSubscriber(String username) {
         repository.deleteSubscriber(username);
     }
 }
