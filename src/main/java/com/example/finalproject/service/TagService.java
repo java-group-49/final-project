@@ -18,10 +18,6 @@ public class TagService {
         tagRepository.save(tag);
     }
 
-    public Tag getTag(String name) {
-        return tagRepository.getTag(name);
-    }
-
     public void deleteTag(String name) {
         tagRepository.deleteTag(name);
     }
