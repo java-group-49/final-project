@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class SubscriberService {
-    private final SubscriberRepository sub;
+    private final SubscriberRepository repository;
     private final JavaMailSender javaMailSender;
 
     @Autowired
     public SubscriberService(SubscriberRepository
            repository, JavaMailSender javaMailSender) {
-        this.sub = repository;
+        this.repository = repository;
         this.javaMailSender = javaMailSender;
     }
 
@@ -34,10 +34,10 @@ public class SubscriberService {
     }
 
     public Subscriber getSubscriber(String username) {
-        return sub.getSubscriber(username);
+        return repository.getSubscriber(username);
     }
     public void addSubscriber(Subscriber s) {
-        sub.save(s);
+        repository.save(s);
     }
 
     public void update (Subscriber s, String username) {
@@ -45,6 +45,6 @@ public class SubscriberService {
     }
 
     public  void deleteSubscriber(String username) {
-        sub.deleteSubscriber(username);
+        repository.deleteSubscriber(username);
     }
 }
