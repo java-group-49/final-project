@@ -19,18 +19,26 @@ public class SubscriberController {
         this.service = service;
     }
 
-    @GetMapping("/subscriber")
+    @GetMapping("/subscribers")
     public ResponseEntity<Object> getSubscribers() {
         List<Subscriber> subscribers;
         try {
-            subscribers = service.getAllSubscriber();
+            subscribers = service.getAllSubscribers();
         } catch (UserNotFoundException ex) {
             return ResponseEntity.status(404).body(new ExceptionBody("No subscribers were found"));
         }
         return ResponseEntity.ok(subscribers);
     }
 
-    @PostMapping("/subscriber")
+    @GetMapping("/subscriber/{username}")
+    public ResponseEntity<Subscriber> getSubscribers(@PathVariable String username) {
+        Subscriber s = service.getSubscriber(username);
+        if (s == null) {
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.ok(s);
+    }
+    @PostMapping("/add")
     public ResponseEntity<Void> addSubscriber(@RequestBody Subscriber s) {
         service.addSubscriber(s);
         return ResponseEntity.status(201).build();
@@ -42,18 +50,9 @@ public class SubscriberController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/subscriber/{username}")
+    @DeleteMapping("/delete/{username}")
     public ResponseEntity<Void> deleteSubscriber(@PathVariable String username) {
         service.deleteSubscriber(username);
         return ResponseEntity.status(202).build();
-    }
-
-    @GetMapping("/subscriber/{username}")
-    public ResponseEntity<Subscriber> getSubscribers(@PathVariable String username) {
-        Subscriber s = service.getSubscriber(username);
-        if (s == null) {
-            return ResponseEntity.status(404).build();
-        }
-        return ResponseEntity.ok(s);
     }
 }

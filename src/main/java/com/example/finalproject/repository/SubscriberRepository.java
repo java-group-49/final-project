@@ -16,6 +16,6 @@ public interface SubscriberRepository extends CrudRepository<Subscriber, Long> {
 
     @Modifying
     @Query(value = "update Subscriber s set s.username = ?1, s.email = ?2 where s.username = ?3")
-    static void updateSubscriber(String username, String email, String oldName) {
+    default void updateSubscriber(String username, String email, String oldName) {
     }
 }

@@ -21,7 +21,7 @@ public class SubscriberService {
         this.javaMailSender = javaMailSender;
     }
 
-    public List<Subscriber> getAllSubscriber() {
+    public List<Subscriber> getAllSubscribers() {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("accforgit49@gmail.com");
@@ -41,7 +41,7 @@ public class SubscriberService {
     }
 
     public void update (Subscriber s, String username) {
-        SubscriberRepository.updateSubscriber(s.getUsername(), s.getEmail(), username);
+        repository.updateSubscriber(s.getUsername(), s.getEmail(), username);
     }
 
     public  void deleteSubscriber(String username) {
