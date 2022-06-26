@@ -12,18 +12,17 @@ import java.util.List;
 
 @RestController
 public class SubscriberController {
-    private final SubscriberService service;
-
+    private final SubscriberService subscriberService;
     @Autowired
-    public SubscriberController(SubscriberService service) {
-        this.service = service;
+    public SubscriberController(SubscriberService subscriberService) {
+        this.subscriberService = subscriberService;
     }
 
     @GetMapping("/subscribers")
     public ResponseEntity<Object> getSubscribers() {
         List<Subscriber> subscribers;
         try {
-            subscribers = service.getAllSubscribers();
+            subscribers = subscriberService.getAllSubscribers();
         } catch (UserNotFoundException ex) {
             return ResponseEntity.status(404).body(new ExceptionBody("No subscribers were found"));
         }
@@ -32,7 +31,7 @@ public class SubscriberController {
 
     @GetMapping("/subscriber")
     public ResponseEntity<Subscriber> getSubscribers(@PathVariable String username) {
-        Subscriber s = service.getSubscriber(username);
+        Subscriber s = subscriberService.getSubscriber(username);
         if (s == null) {
             return ResponseEntity.status(404).build();
         }
@@ -41,19 +40,19 @@ public class SubscriberController {
 
     @PostMapping("/add")
     public ResponseEntity<Void> addSubscriber(@RequestBody Subscriber s) {
-        service.addSubscriber(s);
+        subscriberService.addSubscriber(s);
         return ResponseEntity.status(201).build();
     }
 
     @PutMapping("/update/{username}")
     public ResponseEntity<Void> updateSubscriber(@PathVariable String username, @RequestBody Subscriber s) {
-        service.update(s, username);
+        subscriberService.update(s, username);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete/{username}")
     public ResponseEntity<Void> deleteSubscriber(@PathVariable String username) {
-        service.deleteSubscriber(username);
+        subscriberService.deleteSubscriber(username);
         return ResponseEntity.status(202).build();
     }
 }

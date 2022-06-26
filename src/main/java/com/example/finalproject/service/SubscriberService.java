@@ -9,14 +9,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class SubscriberService {
     private final SubscriberRepository repository;
     private final JavaMailSender javaMailSender;
-
     @Autowired
-    public SubscriberService(SubscriberRepository
-           repository, JavaMailSender javaMailSender) {
+    public SubscriberService(SubscriberRepository repository, JavaMailSender javaMailSender) {
         this.repository = repository;
         this.javaMailSender = javaMailSender;
     }
