@@ -13,27 +13,19 @@ import java.util.List;
 @Service
 public class SubscriberService {
     private final SubscriberRepository repository;
-    private final JavaMailSender javaMailSender;
+
     @Autowired
-    public SubscriberService(SubscriberRepository repository, JavaMailSender javaMailSender) {
+    public SubscriberService(SubscriberRepository repository) {
         this.repository = repository;
-        this.javaMailSender = javaMailSender;
     }
 
     public List<Subscriber> getAllSubscribers() {
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("accforgit49@gmail.com");
-        message.setTo("ya10@ukr.net");
-        message.setSubject("Test subject");
-        message.setText("Test text");
-        javaMailSender.send(message);
 
         return new ArrayList<>();
     }
 
     public Subscriber getSubscriber(String username) {
-        return repository.getSubscriber(username);
+        return repository.getSubscriberByUsername(username);
     }
     public void addSubscriber(Subscriber s) {
         repository.save(s);
@@ -44,6 +36,6 @@ public class SubscriberService {
     }
 
     public void deleteSubscriber(String username) {
-        repository.deleteSubscriber(username);
+        repository.deleteSubscriberByUsername(username);
     }
 }

@@ -10,9 +10,9 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface SubscriberRepository extends CrudRepository<Subscriber, Long> {
-    Subscriber getSubscriber(String username);
+    Subscriber getSubscriberByUsername(String username);
 
-    void deleteSubscriber(String username);
+    void deleteSubscriberByUsername(String username);
 
     @Modifying
     @Query(value = "update Subscriber s set s.username = ?1, s.email = ?2 where s.username = ?3")

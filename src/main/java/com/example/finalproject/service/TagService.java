@@ -19,6 +19,6 @@ public class TagService {
     }
 
     public void deleteTag(String name) {
-        tagRepository.deleteTag(name);
+        tagRepository.deleteTagByName(name);
     }
 }

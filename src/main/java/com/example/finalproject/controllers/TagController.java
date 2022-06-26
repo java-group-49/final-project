@@ -15,8 +15,8 @@ public class TagController {
         this.tagService = tag;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addTeg(@RequestBody Tag tag) {
+    @PostMapping("/addTag")
+    public ResponseEntity<Void> add(@RequestBody Tag tag) {
         tagService.add(tag);
         return ResponseEntity.status(201).build();
     }

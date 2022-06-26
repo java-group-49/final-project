@@ -10,5 +10,5 @@ import javax.transaction.Transactional;
 @Repository
 public interface TagRepository extends CrudRepository<Tag, Long> {
 
-    void deleteTag(String name);
+    void deleteTagByName(String name);
 }

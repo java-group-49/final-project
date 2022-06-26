@@ -38,7 +38,7 @@ public class SubscriberController {
         return ResponseEntity.ok(s);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addSubscriber")
     public ResponseEntity<Void> addSubscriber(@RequestBody Subscriber s) {
         subscriberService.addSubscriber(s);
         return ResponseEntity.status(201).build();
