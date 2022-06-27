@@ -22,18 +22,18 @@ public class SubscriberServiceTest {
     @InjectMocks
     private SubscriberService subscriberService;
 
-//    @Test
-//    public void subscriberNotFoundTest() {
-//        when(subscriberRepository.findAll()).thenReturn(new ArrayList<>());
-//        assertThrows(UserNotFoundException.class, () -> subscriberService.getAllSubscribers(), "No subscribers were found");
-//    }
-//
-//    @Test
-//    public void subscribersWereFoundTest() {
-//        Subscriber subscriber = new Subscriber();
-//        when(subscriberRepository.findAll()).thenReturn(List.of(subscriber));
-//        List<Subscriber> subscribers = subscriberService.getAllSubscribers();
-//        assertEquals(1, subscribers.size());
-//        verify(subscriberRepository, only()).findAll();
-//    }
+    @Test
+    public void subscriberNotFoundTest() {
+        when(subscriberRepository.findAll()).thenReturn(new ArrayList<>());
+        assertThrows(UserNotFoundException.class, () -> subscriberService.getAllSubscribers(), "No subscribers were found");
+    }
+
+    @Test
+    public void subscribersWereFoundTest() {
+        Subscriber subscriber = new Subscriber();
+        when(subscriberRepository.findAll()).thenReturn(List.of(subscriber));
+        List<Subscriber> subscribers = subscriberService.getAllSubscribers();
+        assertEquals(1, subscribers.size());
+        verify(subscriberRepository, only()).findAll();
+    }
 }
