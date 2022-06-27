@@ -1,15 +1,12 @@
 package com.example.finalproject.service;
 
+import com.example.finalproject.exception.UserNotFoundException;
 import com.example.finalproject.models.Subscriber;
 import com.example.finalproject.repository.SubscriberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.sql.DriverManager;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -24,6 +21,8 @@ public class SubscriberService {
     public List<Subscriber> getAllSubscribers() {
         List<Subscriber> list = new ArrayList<>();
         repository.findAll().forEach(list::add);
+        if(list.size() == 0)
+            throw new UserNotFoundException("subscriber not found");
         return list;
     }
 
