@@ -1,6 +1,8 @@
 package com.example.finalproject.models;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "subscriber")
@@ -13,6 +15,20 @@ public class Subscriber {
     private String username;
     @Column(name = "email")
     private String email;
+
+
+    @ManyToMany
+    @JoinTable(name = "subscriber_author",
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors = new LinkedHashSet<>();
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
 
     public long getId() {
         return id;

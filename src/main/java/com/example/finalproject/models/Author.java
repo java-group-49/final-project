@@ -1,6 +1,7 @@
 package com.example.finalproject.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -20,6 +21,9 @@ public class Author {
 
     @Column
     private String nickname;
+
+    @ManyToMany(mappedBy = "authors")
+    Set<Subscriber> subscribers;
 
     public Long getId() {
         return id;
