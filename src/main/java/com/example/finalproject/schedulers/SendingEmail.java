@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,11 +24,11 @@ public class SendingEmail {
     }
 
     @Scheduled(cron = "0 0 3 * * *")
-    void send(){
+    public void send(){
         LocalDate localDate = LocalDate.now().minusDays(1);
 
-        List<EmailMessageModel> listOfSending = postRepository.getListOfDataForSending(new Date(localDate.getYear(),
-                localDate.getMonth().getValue(), localDate.getDayOfMonth()), new Date());
+        List<EmailMessageModel> listOfSending = postRepository.getListOfDataForSending(Date.valueOf(LocalDate.now().minusDays(1)),
+                Date.valueOf(LocalDate.now()));
 
         Map<String, List<EmailMessageModel>> subscribersEmail = listOfSending.stream().
                 collect(Collectors.groupingBy(EmailMessageModel::getEmailSubscriber));
