@@ -50,7 +50,7 @@ public class EmailMessageModel {
 
     @Override
     public String toString() {
-        return "---------------------------------" +
+        return "---------------------------------\n" +
                 titleOfPost + "\nFrom:\t" +
                 author + "\n\n" +
                 bodyOfPost + "\n\n";
