@@ -40,7 +40,6 @@ public class SendingEmailTest {
     public void testingWithEmptyList(){
         when(postRepository.getListOfDataForSending(any(Date.class), any(Date.class))).thenReturn(new ArrayList<>());
         sendingEmail.send();
-        verify(emailService, times(0)).sendSimpleMessage("test@gmail.com",
-                "---------------------------------\ntestTitle\nFrom:\ttestAuthor\n\ntestBody\n\n");
+        verify(emailService, times(0)).sendSimpleMessage(any(),any());
     }
 }
