@@ -29,11 +29,18 @@ public class SendingEmailTest {
 
     @Test
     public void testingOfEmail(){
-        LocalDate localDate = LocalDate.now().minusDays(1);
         when(postRepository.getListOfDataForSending(any(Date.class), any(Date.class))).thenReturn(
                         List.of(new EmailMessageModel("test@gmail.com","testAuthor","testTitle","testBody")));
         sendingEmail.send();
         verify(emailService, times(1)).sendSimpleMessage("test@gmail.com",
-                "---------------------------------\ntestTitle\nFrom:\ntestAuthor\n\ntestBody\n\n");
+                "---------------------------------\ntestTitle\nFrom:\ttestAuthor\n\ntestBody\n\n");
+    }
+
+    @Test
+    public void testingWithEmptyList(){
+        when(postRepository.getListOfDataForSending(any(Date.class), any(Date.class))).thenReturn(new ArrayList<>());
+        sendingEmail.send();
+        verify(emailService, times(0)).sendSimpleMessage("test@gmail.com",
+                "---------------------------------\ntestTitle\nFrom:\ttestAuthor\n\ntestBody\n\n");
     }
 }
