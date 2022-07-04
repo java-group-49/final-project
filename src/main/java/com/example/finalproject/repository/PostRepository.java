@@ -18,4 +18,6 @@ public interface PostRepository extends CrudRepository<Post, Long> {
             "INNER join Post p on p.authorId = au.id " +
             "where ?1 < p.publicationDate AND p.publicationDate < ?2 ")
     List<EmailMessageModel> getListOfDataForSending(Date from, Date to);
+
+
 }
