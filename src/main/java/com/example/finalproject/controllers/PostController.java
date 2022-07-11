@@ -31,6 +31,6 @@ public class PostController {
             @RequestParam(name = "end_date")@DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate endDate
             ){
         System.out.println(author + " " + tag + " " + startDate + " " + endDate);
-        return ResponseEntity.status(201).body(postService.getPostsByParam());
+        return ResponseEntity.status(201).body(postService.getPostsByParam(author, tag, startDate, endDate));
     }
 }
