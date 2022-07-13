@@ -18,7 +18,7 @@ public class AuthorSubscriberController {
         this.authorSubscriberService = authorSubscriberService;
     }
 
-    @PostMapping("/author_subscriber")
+    @PostMapping("/subscriber")
     public ResponseEntity<String> addAuthorSubscriber(@RequestBody AuthorSubscriber authorSubscriber) {
         try {
             authorSubscriberService.add(authorSubscriber);
