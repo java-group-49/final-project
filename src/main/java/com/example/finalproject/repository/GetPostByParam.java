@@ -1,5 +1,6 @@
 package com.example.finalproject.repository;
 
+import com.example.finalproject.exceptions.IncorrectValueException;
 import com.example.finalproject.models.Author;
 import com.example.finalproject.models.Post;
 import com.example.finalproject.models.Tag;
@@ -11,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,30 +23,29 @@ public class GetPostByParam {
     private EntityManager em;
 
     public List<Post> getPostsByParam(String author, String tag, LocalDate startDate, LocalDate endDate) {
+        if(author.isEmpty() || tag.isEmpty())
+            throw new IncorrectValueException("Incorrect value!!!");
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery <Post> criteriaQuery = criteriaBuilder.createQuery(Post.class);
 
         Metamodel metamodel = em.getMetamodel();
         EntityType<Post> post_ = metamodel.entity(Post.class);
         Root <Post> postRoot = criteriaQuery.from(Post.class);
-        Root<Author> authorRoot = criteriaQuery.from(Author.class);
-        Root<Tag> tagRoot = criteriaQuery.from(Tag.class);
+        //Root<Author> authorRoot = criteriaQuery.from(Author.class);
+        //Root<Tag> tagRoot = criteriaQuery.from(Tag.class);
 
         Join<Post, Tag> postTagJoin = postRoot.join(post_.getSingularAttribute("tag", Tag.class));
         Join<Post, Author> postAuthorJoin = postRoot.join(post_.getSingularAttribute("author", Author.class));
 
-        List<Predicate> predicateList = new ArrayList<>();
+        Predicate startTime = criteriaBuilder.greaterThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(startDate) );
+        Predicate endTime = criteriaBuilder.lessThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(endDate));
+        Predicate authorName = criteriaBuilder.equal(postRoot.get("author").get("name"), author);
+        Predicate tagName = criteriaBuilder.equal(postRoot.get("tag").get("name"), tag);
+        Predicate finalPredicate = criteriaBuilder.and(startTime, endTime, authorName, tagName);
 
-        //adding elements of collection
-
-        predicateList.add(criteriaBuilder.greaterThanOrEqualTo(postRoot.get("publicationDate"),startDate));
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(postRoot.get("publicationDate"),endDate));
-        predicateList.add(criteriaBuilder.equal(authorRoot.get("name"), author));
-        predicateList.add(criteriaBuilder.equal(tagRoot.get("name"), tag));
-        //Predicate predicate1 = criteriaBuilder.equal(root.get("authorId"), 1);
-
-
-        criteriaQuery.where(predicateList.toArray(new Predicate[0]));
+        criteriaQuery.where(finalPredicate);
+        System.out.println("TESTERROR");
         return em.createQuery(criteriaQuery).getResultList();
+        //return new ArrayList<>();
     }
 }

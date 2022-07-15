@@ -13,11 +13,10 @@ import java.util.List;
 @Transactional
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
-    @Query(value = "SELECT new com.example.finalproject.models.EmailMessageModel(sb.email, au.nickname, p.title, p.body) " +
-            "FROM Author au inner join AuthorSubscriber ausb on au.id = ausb.authorId " +
-            "INNER join Subscriber sb on sb.id = ausb.subscriberId " +
-            "INNER join Post p on p.authorId = au.id " +
-            "where ?1 < p.publicationDate AND p.publicationDate < ?2 ")
+    @Query(value = "SELECT new com.example.finalproject.models.EmailMessageModel(sb.email, au.nickname, p.title, p.body)  " +
+            "FROM Post p JOIN p.author au JOIN AuthorSubscriber ausb on au.id = ausb.authorId " +
+            "JOIN Subscriber sb on sb.id = ausb.subscriberId " +
+            "WHERE ?1 < p.publicationDate AND p.publicationDate < ?2")
     List<EmailMessageModel> getListOfDataForSending(Date from, Date to);
 
 
