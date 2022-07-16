@@ -25,7 +25,6 @@ public class SendingEmail {
 
     @Scheduled(cron = "0 0 3 * * *")
     public void send(){
-        LocalDate localDate = LocalDate.now().minusDays(1);
 
         List<EmailMessageModel> listOfSending = postRepository.getListOfDataForSending(Date.valueOf(LocalDate.now().minusDays(1)),
                 Date.valueOf(LocalDate.now()));

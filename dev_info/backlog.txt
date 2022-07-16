@@ -4,7 +4,7 @@
 4. Create and save new tag(POST /tag).
 5. Attach subscriber to author(POST /subscribe).
 6. Detach subscriber from author (DELETE /unsubscribe).
-7*. Get all posts by author/tag/dates (GET /posts?author="nickname"&tag="name"&start_date=&end_date).
+7*. Get all posts by author/tag/dates (GET /posts?author="nickname"&tag="name"&start_date=&end_date).(+)
 8*. Get authors by (subscriber username)/rate(higher than requested)/ (GET /authors?subscriber=&rate=).
 9. Get subscribers by author(GET /subscriber?author=).
 10*. Create functionality of sending messages to subscribers by email. This functionality should be
