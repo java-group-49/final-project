@@ -1,20 +1,9 @@
-package com.example.finalproject.models;
+package com.example.finalproject.keys;
 
-import com.example.finalproject.keys.AuthorSubscriberKey;
-
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "author_subscriber")
-@IdClass(AuthorSubscriberKey.class)
-public class AuthorSubscriber implements Serializable {
-    @Id
-    @Column(name = "author_id")
+public class AuthorSubscriberKey implements Serializable {
     private Long authorId;
-
-    @Id
-    @Column(name = "subscriber_id")
     private Long subscriberId;
 
     public Long getAuthorId() {
