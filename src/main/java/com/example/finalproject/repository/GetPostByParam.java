@@ -34,8 +34,8 @@ public class GetPostByParam {
         //Root<Author> authorRoot = criteriaQuery.from(Author.class);
         //Root<Tag> tagRoot = criteriaQuery.from(Tag.class);
 
-        //Join<Post, Tag> postTagJoin = postRoot.join(post_.getSingularAttribute("tag", Tag.class));
-        //Join<Post, Author> postAuthorJoin = postRoot.join(post_.getSingularAttribute("author", Author.class));
+        postRoot.join(post_.getSingularAttribute("tag", Tag.class));
+        postRoot.join(post_.getSingularAttribute("author", Author.class));
 
         Predicate startTime = criteriaBuilder.greaterThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(startDate) );
         Predicate endTime = criteriaBuilder.lessThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(endDate));
