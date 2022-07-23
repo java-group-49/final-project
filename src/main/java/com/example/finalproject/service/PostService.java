@@ -1,19 +1,18 @@
 package com.example.finalproject.service;
 
 import com.example.finalproject.models.Post;
-import com.example.finalproject.repository.GetPostByParam;
+import com.example.finalproject.repository.PostFilersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostService {
-    private GetPostByParam getPostByParam;
+    private final PostFilersRepository getPostByParam;
     @Autowired
-    public PostService(GetPostByParam getPostByParam) {
+    public PostService(PostFilersRepository getPostByParam) {
         this.getPostByParam = getPostByParam;
     }
 
