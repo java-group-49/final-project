@@ -13,6 +13,8 @@ import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -21,8 +23,7 @@ public class PostFilersRepository {
     private EntityManager em;
 
     public List<Post> getPostsByParam(String author, String tag, LocalDate startDate, LocalDate endDate) {
-        if(author.isEmpty() || tag.isEmpty() || startDate == null || endDate == null)
-            throw new IncorrectValueException("Incorrect value!!!");
+
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery <Post> criteriaQuery = criteriaBuilder.createQuery(Post.class);
 
@@ -33,11 +34,22 @@ public class PostFilersRepository {
         postRoot.join(post_.getSingularAttribute("tag", Tag.class));
         postRoot.join(post_.getSingularAttribute("author", Author.class));
 
-        Predicate startTime = criteriaBuilder.greaterThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(startDate) );
-        Predicate endTime = criteriaBuilder.lessThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(endDate));
-        Predicate authorName = criteriaBuilder.equal(postRoot.get("author").get("name"), author);
-        Predicate tagName = criteriaBuilder.equal(postRoot.get("tag").get("name"), tag);
-        Predicate finalPredicate = criteriaBuilder.and(startTime, endTime, authorName, tagName);
+        List<Predicate> predicateList = new LinkedList<>();
+        if(startDate != null) {
+            predicateList.add(criteriaBuilder.greaterThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(startDate)));
+
+        }
+        if(endDate != null) {
+            predicateList.add(criteriaBuilder.lessThanOrEqualTo(postRoot.get("publicationDate"), Date.valueOf(endDate)));
+        }
+            if(author != null) {
+                predicateList.add(criteriaBuilder.equal(postRoot.get("author").get("name"), author));
+        }
+        if(tag != null) {
+            predicateList.add(criteriaBuilder.equal(postRoot.get("tag").get("name"), tag));
+        }
+
+        Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
         criteriaQuery.where(finalPredicate);
 
         return em.createQuery(criteriaQuery).getResultList();

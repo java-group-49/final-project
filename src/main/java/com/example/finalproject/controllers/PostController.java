@@ -25,10 +25,10 @@ public class PostController {
 
     @GetMapping("/get")
     public ResponseEntity<List<Post>> getPostsByParam(
-            @RequestParam String author,
-            @RequestParam String tag,
-            @RequestParam(name = "start_date")@DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate startDate,
-            @RequestParam(name = "end_date")@DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate endDate
+            @RequestParam(required = false) String author,
+            @RequestParam(required = false) String tag,
+            @RequestParam(name = "start_date", required = false)@DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate startDate,
+            @RequestParam(name = "end_date", required = false)@DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate endDate
             ){
         System.out.println(author + " " + tag + " " + Date.valueOf(startDate) + " " + Date.valueOf(endDate));
         return ResponseEntity.status(201).body(postService.getPostsByParam(author, tag, startDate, endDate));
