@@ -50,7 +50,7 @@ public class PostFilersRepository {
         }
 
         Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
-        criteriaQuery.where(finalPredicate);
+        criteriaQuery.select(postRoot).where(finalPredicate);
 
         return em.createQuery(criteriaQuery).getResultList();
     }

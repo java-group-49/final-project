@@ -1,6 +1,7 @@
 package com.example.finalproject.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -20,6 +21,14 @@ public class Author {
 
     @Column
     private String nickname;
+
+    @ManyToMany
+    @JoinTable(
+            name = "author_subscriber",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "subscriber_id")
+    )
+    Set<Subscriber> subscriberSet;
 
     public Long getId() {
         return id;
@@ -59,5 +68,13 @@ public class Author {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public Set<Subscriber> getSubscriberSet() {
+        return subscriberSet;
+    }
+
+    public void setSubscriberSet(Set<Subscriber> subscriberSet) {
+        this.subscriberSet = subscriberSet;
     }
 }
