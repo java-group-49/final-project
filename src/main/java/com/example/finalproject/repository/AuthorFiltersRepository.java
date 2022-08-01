@@ -1,9 +1,6 @@
 package com.example.finalproject.repository;
 
-import com.example.finalproject.models.Author;
-import com.example.finalproject.models.AuthorSubscriber;
-import com.example.finalproject.models.Post;
-import com.example.finalproject.models.Subscriber;
+import com.example.finalproject.models.*;
 import com.example.finalproject.service.AuthorService;
 import org.springframework.stereotype.Repository;
 
@@ -31,19 +28,20 @@ public class AuthorFiltersRepository {
         Root<Author> authorRoot = criteriaQuery.from(Author.class);
         Root<Subscriber> subscriberRoot = criteriaQuery.from(Subscriber.class);
 
-        Join<Author, Subscriber> authorSubscriberSetJoin = authorRoot.join("subscriberSet");
+
 
         List<Predicate> predicateList = new LinkedList<>();
         if(rate != null) {
-            predicateList.add(criteriaBuilder.equal(authorRoot.get("rate"), rate));
+            predicateList.add(criteriaBuilder.equal(authorRoot.get(Author_.rate), rate));
         }
         if(subscriber != null){
-            System.out.println("check");
-            //predicateList.add(criteriaBuilder.equal(subscriberRoot.get("username"), subscriber));
+            System.out.println("check" + subscriber);
+            SetJoin<Author, Subscriber> authorSubscriberSetJoin = authorRoot.join(Author_.subscriberSet);
+            predicateList.add(criteriaBuilder.equal(authorSubscriberSetJoin.get(Subscriber_.username), subscriber));
         }
 
         Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
-        criteriaQuery.select(authorRoot).where(finalPredicate);
+        criteriaQuery.select(authorRoot).where(finalPredicate).distinct(true);
 
         return em.createQuery(criteriaQuery).getResultList();
         //return new ArrayList<>();
