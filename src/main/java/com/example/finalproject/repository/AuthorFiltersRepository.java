@@ -43,6 +43,5 @@ public class AuthorFiltersRepository {
         criteriaQuery.select(authorRoot).where(finalPredicate).distinct(true);
 
         return em.createQuery(criteriaQuery).getResultList();
-        //return new ArrayList<>();
     }
 }
