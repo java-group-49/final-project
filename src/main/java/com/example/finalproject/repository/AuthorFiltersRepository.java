@@ -35,7 +35,6 @@ public class AuthorFiltersRepository {
             predicateList.add(criteriaBuilder.equal(authorRoot.get(Author_.rate), rate));
         }
         if(subscriber != null){
-            System.out.println("check" + subscriber);
             SetJoin<Author, Subscriber> authorSubscriberSetJoin = authorRoot.join(Author_.subscriberSet);
             predicateList.add(criteriaBuilder.equal(authorSubscriberSetJoin.get(Subscriber_.username), subscriber));
         }

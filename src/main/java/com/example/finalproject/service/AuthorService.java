@@ -24,19 +24,6 @@ public class AuthorService{
     }
 
     public List<Author> getByParam(String subscriber, Byte rate){
-        System.out.println(rate + " " + subscriber);
-//        //return authorFiltersRepository.getAuthorByParam(subscriber, rate);
-//        if(rate != null && subscriber != null)
-//            return authorRepository.authorAllParam(rate, subscriber);
-//        else if(rate != null && subscriber == null)
-//            return authorRepository.getAuthorsByRate(rate);
-//        else if(rate == null && subscriber != null)
-//            return authorRepository.authorSubscriberNameFilter(subscriber);
-//        else {
-//            List<Author> authorList = new ArrayList<>();
-//            authorRepository.findAll().forEach(authorList::add);
-//            return authorList;
-//        }
         return authorFiltersRepository.getAuthorByParam(subscriber, rate);
     }
 }

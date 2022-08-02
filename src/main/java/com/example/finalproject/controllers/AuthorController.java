@@ -28,7 +28,6 @@ public class AuthorController {
             @RequestParam(required = false) String subscriber,
             @RequestParam(required = false) Byte rate
     ){
-        System.out.println(subscriber + " " + rate);
         if(rate != null) {
             if (rate > 10 || rate < 0)
                 return ResponseEntity.badRequest().build();
