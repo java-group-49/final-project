@@ -1,9 +1,6 @@
 package com.example.finalproject.keys;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import java.io.Serializable;
-
 
 public class AuthorSubscriberKey implements Serializable {
     private Long authorId;
