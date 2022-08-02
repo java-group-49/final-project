@@ -22,6 +22,7 @@ public class AuthorSubscriberController {
     public ResponseEntity<String> addAuthorSubscriber(@RequestBody AuthorSubscriber authorSubscriber) {
         try {
             authorSubscriberService.add(authorSubscriber);
+
             return ResponseEntity.status(201).build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Некоректное значение");

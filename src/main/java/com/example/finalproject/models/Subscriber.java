@@ -1,6 +1,7 @@
 package com.example.finalproject.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "subscriber")
@@ -12,4 +13,6 @@ public class Subscriber {
     private String username;
     @Column
     private String email;
+    @ManyToMany(mappedBy = "subscriberSet")
+    Set<Author> authorSet;
 }

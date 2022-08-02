@@ -1,6 +1,7 @@
 package com.example.finalproject.models;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
 @Entity
 @Table(name = "post")
@@ -12,12 +13,14 @@ public class Post {
     private String title;
     @Column
     private String body;
-    @Column(name = "author_id")
-    private Long authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
     @Column(name = "publication_date")
-    private LocalDate publicationDate;
-    @Column(name = "tag_id")
-    private Long tagId;
+    private Date publicationDate;
+    @ManyToOne
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
 
     public Long getId() {
         return id;
@@ -43,27 +46,27 @@ public class Post {
         this.body = body;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Long author_id) {
-        this.authorId = author_id;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
-    public LocalDate getPublicationDate() {
+    public Date getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(LocalDate publication_date) {
-        this.publicationDate = publication_date;
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
-    public Long getTagId() {
-        return tagId;
+    public Tag getTag() {
+        return tag;
     }
 
-    public void setTagId(Long tag_id) {
-        this.tagId = tag_id;
+    public void setTag(Tag tag) {
+        this.tag = tag;
     }
 }
