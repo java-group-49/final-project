@@ -23,7 +23,6 @@ public class SubscriberService {
 
     public List<Subscriber> getByAuthor(String nickname){
         if(nickname == null){
-            System.out.println("test");
             List<Subscriber> list = new LinkedList<>();
             subscriberRepository.findAll().forEach(list::add);
             return list;

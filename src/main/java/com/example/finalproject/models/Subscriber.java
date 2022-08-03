@@ -1,6 +1,7 @@
 package com.example.finalproject.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,8 +14,6 @@ public class Subscriber {
     private String username;
     @Column
     private String email;
-    @ManyToMany(mappedBy = "subscriberSet")
-    Set<Author> authorSet;
 
     public Long getId() {
         return id;
@@ -38,13 +37,5 @@ public class Subscriber {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<Author> getAuthorSet() {
-        return authorSet;
-    }
-
-    public void setAuthorSet(Set<Author> authorSet) {
-        this.authorSet = authorSet;
     }
 }
